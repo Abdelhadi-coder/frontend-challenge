@@ -1,7 +1,9 @@
 import React from 'react';
 import { Box, List, ListItemButton, ListItemIcon, ListItemText, Typography, Divider } from '@mui/material';
-import CampaignIcon from '@mui/icons-material/Flag';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import FolderOpenIcon from '@mui/icons-material/FolderOpenOutlined';
+import { GridView } from '@mui/icons-material';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import SmsIcon from '@mui/icons-material/Sms';
 import HelpIcon from '@mui/icons-material/Help';
@@ -11,7 +13,7 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
-        width: 260,
+        width: 300,
         height: '100vh',
         bgcolor: '#f9fafb',
         borderRight: '1px solid #ddd',
@@ -36,62 +38,79 @@ const Sidebar = () => {
 
         <List>
           <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#1976d2' }}>
-              <DashboardIcon />
+            <ListItemIcon sx={{ color: '#999888' }}>
+              <GridView />
             </ListItemIcon>
             <ListItemText
               primary="Mon tableau de bord"
-              primaryTypographyProps={{ fontWeight: 600 }}
+              sx={{ color: '#999888' }}
+              primaryTypographyProps={{ fontWeight: 400 }}
             />
           </ListItemButton>
 
           <ListItemButton selected sx={{ borderRadius: 1, mb: 0.5 }}>
             <ListItemIcon sx={{ color: '#0d47a1' }}>
-              <CampaignIcon />
+              <FolderOpenIcon />
             </ListItemIcon>
             <ListItemText
               primary="Ma Campagne"
+              sx={{ color: '#0d47a1' }}
               primaryTypographyProps={{ fontWeight: 700 }}
             />
           </ListItemButton>
 
           <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#1976d2' }}>
-              <PersonIcon />
+            <ListItemIcon sx={{ color: '#999888' }}>
+              <GroupsOutlinedIcon />
             </ListItemIcon>
             <ListItemText
               primary="Récapitulatif des Utilisateurs"
-              primaryTypographyProps={{ fontWeight: 600 }}
+              sx={{ color: '#999888' }}
+              primaryTypographyProps={{ fontWeight: 400 }}
             />
           </ListItemButton>
 
           <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#1976d2' }}>
+            <ListItemIcon sx={{ color: '#999888' }}>
+              <InsertDriveFileOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary="Supports de diffusion"
+              sx={{ color: '#999888' }}
+              primaryTypographyProps={{ fontWeight: 400 }}
+            />
+          </ListItemButton>
+
+          <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
+            <ListItemIcon sx={{ color: '#999888' }}>
               <SmsIcon />
             </ListItemIcon>
             <ListItemText
               primary="Campagnes SMS"
-              primaryTypographyProps={{ fontWeight: 600 }}
+              sx={{ color: '#999888' }}
+              primaryTypographyProps={{ fontWeight: 400 }}
             />
           </ListItemButton>
 
           <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#1976d2' }}>
+            <ListItemIcon sx={{ color: '#999888' }}>
               <GoogleIcon />
             </ListItemIcon>
             <ListItemText
               primary="Gestion des Avis Google"
-              primaryTypographyProps={{ fontWeight: 600 }}
+              sx={{ color: '#999888' }}
+              primaryTypographyProps={{ fontWeight: 400 }}
             />
           </ListItemButton>
 
           <ListItemButton sx={{ borderRadius: 1 }}>
-            <ListItemIcon sx={{ color: '#1976d2' }}>
+            <ListItemIcon sx={{ color: '#999888' }}>
               <HelpIcon />
             </ListItemIcon>
             <ListItemText
               primary="Centre d’aide"
-              primaryTypographyProps={{ fontWeight: 600 }}
+              sx={{ color: '#999888' }}
+              primaryTypographyProps={{ fontWeight: 400 }}
             />
           </ListItemButton>
         </List>
