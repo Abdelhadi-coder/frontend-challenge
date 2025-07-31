@@ -1,134 +1,164 @@
 import React from 'react';
-import { Box, List, ListItemButton, ListItemIcon, ListItemText, Typography, Divider } from '@mui/material';
+import {
+  Box,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  Divider,
+  Select,
+  MenuItem,
+  Card,
+  CardContent,
+  Button
+} from '@mui/material';
+
 import FolderOpenIcon from '@mui/icons-material/FolderOpenOutlined';
 import { GridView } from '@mui/icons-material';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
-import PersonIcon from '@mui/icons-material/Person';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SmsIcon from '@mui/icons-material/Sms';
-import HelpIcon from '@mui/icons-material/Help';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import GoogleIcon from '@mui/icons-material/Google';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 const Sidebar = () => {
   return (
     <Box
       sx={{
         width: 300,
-        height: '100vh',
-        bgcolor: '#f9fafb',
-        borderRight: '1px solid #ddd',
-        p: 3,
+        // height: '100vh',
+        bgcolor: '#fff',
+        borderRight: '2px solid #eee',
+        borderBottom: '2px solid #eee',
+        borderRadius: 3,
+        p: 2,
         position: 'fixed',
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'space-between',
+        justifyContent: 'space-between',
         overflowY: 'auto',
-        boxShadow: '2px 0 8px rgba(0,0,0,0.05)',
       }}
     >
       <Box>
-        <Typography
-          variant="h5"
-          fontWeight="bold"
-          mb={3}
-          sx={{ color: '#1976d2', letterSpacing: 1.2 }}
+        <Box display="flex" justifyContent="start" mb={1}>
+          <img
+            src="../src/assets/logo.png"
+            alt="Logo"
+            style={{ width: 90, objectFit: 'contain' }}
+          />
+        </Box>
+        <Divider sx={{ width: "150%"}} />
+        <Select
+          fullWidth
+          defaultValue=""
+          displayEmpty
+          sx={{
+            mb: 2,
+            mt: 3,
+            bgcolor: '#fff',
+            borderRadius: 1,
+            border: '1px solid #ddd',
+            fontSize: 14,
+          }}
         >
-          THE GIFT
-        </Typography>
+          <MenuItem value="">Tous les enseignes</MenuItem>
+        </Select>
 
         <List>
-          <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#999888' }}>
-              <GridView />
-            </ListItemIcon>
-            <ListItemText
-              primary="Mon tableau de bord"
-              sx={{ color: '#999888' }}
-              primaryTypographyProps={{ fontWeight: 400 }}
-            />
-          </ListItemButton>
-
-          <ListItemButton selected sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#0d47a1' }}>
-              <FolderOpenIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Ma Campagne"
-              sx={{ color: '#0d47a1' }}
-              primaryTypographyProps={{ fontWeight: 700 }}
-            />
-          </ListItemButton>
-
-          <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#999888' }}>
-              <GroupsOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Récapitulatif des Utilisateurs"
-              sx={{ color: '#999888' }}
-              primaryTypographyProps={{ fontWeight: 400 }}
-            />
-          </ListItemButton>
-
-          <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#999888' }}>
-              <InsertDriveFileOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Supports de diffusion"
-              sx={{ color: '#999888' }}
-              primaryTypographyProps={{ fontWeight: 400 }}
-            />
-          </ListItemButton>
-
-          <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#999888' }}>
-              <SmsIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Campagnes SMS"
-              sx={{ color: '#999888' }}
-              primaryTypographyProps={{ fontWeight: 400 }}
-            />
-          </ListItemButton>
-
-          <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
-            <ListItemIcon sx={{ color: '#999888' }}>
-              <GoogleIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Gestion des Avis Google"
-              sx={{ color: '#999888' }}
-              primaryTypographyProps={{ fontWeight: 400 }}
-            />
-          </ListItemButton>
-
-          <ListItemButton sx={{ borderRadius: 1 }}>
-            <ListItemIcon sx={{ color: '#999888' }}>
-              <HelpIcon />
-            </ListItemIcon>
-            <ListItemText
-              primary="Centre d’aide"
-              sx={{ color: '#999888' }}
-              primaryTypographyProps={{ fontWeight: 400 }}
-            />
-          </ListItemButton>
+          {[
+            { text: 'Mon tableau de bord', icon: <GridView />, active: false },
+            { text: 'Ma Campagne', icon: <FolderOpenIcon />, active: true },
+            { text: 'Récapitulatif des Utilisateurs', icon: <GroupsOutlinedIcon />, active: false },
+            { text: 'Supports de diffusion', icon: <InsertDriveFileOutlinedIcon />, active: false },
+            { text: 'Campagnes SMS', icon: <SmsIcon />, active: false },
+            { text: 'Gestion des Avis Google', icon: <GoogleIcon />, active: false },
+            { text: 'Mon Centre d’aide', icon: <HelpOutlineIcon />, active: false },
+          ].map(({ text, icon, active }) => (
+            <ListItemButton
+              key={text}
+              selected={active}
+              sx={{
+                borderRadius: 1,
+                mb: 0.5,
+                bgcolor: active ? '#e8f0fe' : 'transparent',
+                '&:hover': { bgcolor: active ? '#e8f0fe' : '#f7f7f7' },
+              }}
+            >
+              <ListItemIcon
+                sx={{ color: active ? '#0d47a1' : '#999', minWidth: 40 }}
+              >
+                {icon}
+              </ListItemIcon>
+              <ListItemText
+                primary={text}
+                primaryTypographyProps={{
+                  fontWeight: active ? 600 : 400,
+                  color: active ? '#0d47a1' : '#999',
+                  fontSize: 14,
+                }}
+              />
+            </ListItemButton>
+          ))}
         </List>
+
+        <Card
+          variant="outlined"
+          sx={{
+            mt: 8,
+            borderRadius: 3,
+            borderWidth: 2,
+            backgroundColor: '#f0f3ff', 
+            borderColor: '#3f51b5',
+            textAlign: 'center',
+            overflow: 'hidden',
+          }}
+        >
+          <CardContent sx={{ p: 2 }}>
+            <Typography variant="subtitle2" fontWeight={600} fontSize={12} mb={1}>
+              Commandez Vos Flyers Personnalisés
+            </Typography>
+            {/* <img
+              src="/flyers.png"
+              alt="Flyers"
+              style={{ width: '100%', marginBottom: 8 }}
+            /> */}
+            <Typography variant="body2" color="text.secondary" fontSize={10} mb={2}>
+              Personnalisez et commandez vos PLV pour booster l'engagement
+              client. Créez des supports à votre image pour maximiser vos
+              conversions.
+            </Typography>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ borderRadius: 1, textTransform: 'none', fontWeight: 600 }}
+            >
+              COMMANDEZ
+            </Button>
+          </CardContent>
+        </Card>
       </Box>
 
       <Box>
-        <Divider sx={{ my: 3 }} />
         <List>
           <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
+            <ListItemIcon sx={{ color: '#000', minWidth: 40 }}>
+              <AccountCircleOutlinedIcon />
+            </ListItemIcon>
             <ListItemText
               primary="Compte"
-              primaryTypographyProps={{ fontWeight: 600, color: '#1976d2' }}
+              primaryTypographyProps={{ fontWeight: 500, color: '#000' }}
             />
           </ListItemButton>
           <ListItemButton sx={{ borderRadius: 1 }}>
+            <ListItemIcon sx={{ color: '#000', minWidth: 40 }}>
+              <LogoutOutlinedIcon />
+            </ListItemIcon>
             <ListItemText
               primary="Déconnexion"
-              primaryTypographyProps={{ fontWeight: 600, color: '#d32f2f' }}
+              primaryTypographyProps={{ fontWeight: 500, color: '#000' }}
             />
           </ListItemButton>
         </List>
