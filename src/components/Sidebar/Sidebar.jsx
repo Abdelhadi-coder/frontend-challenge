@@ -51,24 +51,6 @@ const Sidebar = () => {
           />
         </Box>
         <Divider sx={{ width: "150%"}} />
-        {/* <Select
-          fullWidth
-          defaultValue=""
-          displayEmpty
-          sx={{
-            mb: 0.5,
-            mt: 1,
-            bgcolor: '#fff',
-            borderRadius: 1,
-            borderLeft: '8px solid blue',
-            outline: "none", 
-            // border: '1px solid #ddd',
-            height: 30,
-            fontSize: 14,
-          }}
-        >
-          <MenuItem value="">Tous les enseignes</MenuItem>
-        </Select> */}
         <Select
           fullWidth
           defaultValue=""
@@ -79,11 +61,12 @@ const Sidebar = () => {
                 sx={{
                   ml: -1.7,
                   width: 9,
-                  height: 35,
+                  height: 31,
                   bgcolor: 'blue',
                   borderTopLeftRadius: 3,
                   borderBottomLeftRadius: 3,
                   mr: 1,
+                  fontSize: "10px",
                 }}
               />
               {selected || 'Tous les enseignes'}
@@ -91,11 +74,11 @@ const Sidebar = () => {
           )}
           sx={{
             mb: 0.5,
-            mt: 1,
+            mt: 2,
             bgcolor: '#fff',
             borderRadius: 1,
             fontSize: 14,
-            height: 36,
+            height: 32,
             '& fieldset': { borderColor: '#ddd' },
           }}
         >
@@ -118,7 +101,6 @@ const Sidebar = () => {
               selected={active}
               sx={{
                 borderRadius: 1,
-                mb: 0.5,
                 bgcolor: active ? '#e8f0fe' : 'transparent',
                 '&:hover': { bgcolor: active ? '#e8f0fe' : '#f7f7f7' },
               }}
