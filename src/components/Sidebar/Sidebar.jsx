@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 
 import FolderOpenIcon from '@mui/icons-material/FolderOpenOutlined';
-import { GridView } from '@mui/icons-material';
+import { BorderLeft, GridView } from '@mui/icons-material';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -39,7 +39,7 @@ const Sidebar = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        overflowY: 'auto',
+        overflowY: 'scroll',
       }}
     >
       <Box>
@@ -51,21 +51,57 @@ const Sidebar = () => {
           />
         </Box>
         <Divider sx={{ width: "150%"}} />
-        <Select
+        {/* <Select
           fullWidth
           defaultValue=""
           displayEmpty
           sx={{
-            mb: 2,
-            mt: 3,
+            mb: 0.5,
+            mt: 1,
             bgcolor: '#fff',
             borderRadius: 1,
-            border: '1px solid #ddd',
+            borderLeft: '8px solid blue',
+            outline: "none", 
+            // border: '1px solid #ddd',
+            height: 30,
             fontSize: 14,
           }}
         >
           <MenuItem value="">Tous les enseignes</MenuItem>
+        </Select> */}
+        <Select
+          fullWidth
+          defaultValue=""
+          displayEmpty
+          renderValue={(selected) => (
+            <Box display="flex" alignItems="center">
+              <Box
+                sx={{
+                  ml: -1.7,
+                  width: 9,
+                  height: 35,
+                  bgcolor: 'blue',
+                  borderTopLeftRadius: 3,
+                  borderBottomLeftRadius: 3,
+                  mr: 1,
+                }}
+              />
+              {selected || 'Tous les enseignes'}
+            </Box>
+          )}
+          sx={{
+            mb: 0.5,
+            mt: 1,
+            bgcolor: '#fff',
+            borderRadius: 1,
+            fontSize: 14,
+            height: 36,
+            '& fieldset': { borderColor: '#ddd' },
+          }}
+        >
+          <MenuItem value="">Tous les enseignes</MenuItem>
         </Select>
+
 
         <List>
           {[
@@ -107,7 +143,7 @@ const Sidebar = () => {
         <Card
           variant="outlined"
           sx={{
-            mt: 8,
+            mt: 7,
             borderRadius: 3,
             borderWidth: 2,
             backgroundColor: '#f0f3ff', 
