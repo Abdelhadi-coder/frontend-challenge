@@ -15,12 +15,12 @@ import {
 } from '@mui/material';
 
 import FolderOpenIcon from '@mui/icons-material/FolderOpenOutlined';
-import { BorderLeft, GridView } from '@mui/icons-material';
+import { GridView } from '@mui/icons-material';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import InfoOutlineIcon from '@mui/icons-material/InfoOutline';
 import SmsIcon from '@mui/icons-material/Sms';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import GoogleIcon from '@mui/icons-material/Google';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
@@ -29,20 +29,19 @@ const Sidebar = () => {
     <Box
       sx={{
         width: 300,
-        // height: '100vh',
+        height: '100vh',        // hauteur écran
         bgcolor: '#fff',
         borderRight: '2px solid #eee',
         borderBottom: '2px solid #eee',
         borderRadius: 3,
         p: 2,
         position: 'fixed',
-        display: 'flex',
+        display: 'flex',        // Flex pour séparer scroll et bas
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        overflowY: 'scroll',
       }}
     >
-      <Box>
+      {/* Partie scrollable */}
+      <Box sx={{ flex: 1, overflowY: 'auto' }}>
         <Box display="flex" justifyContent="start" mb={1}>
           <img
             src="../src/assets/logo.png"
@@ -66,7 +65,6 @@ const Sidebar = () => {
                   borderTopLeftRadius: 3,
                   borderBottomLeftRadius: 3,
                   mr: 1,
-                  fontSize: "10px",
                 }}
               />
               {selected || 'Tous les enseignes'}
@@ -85,7 +83,6 @@ const Sidebar = () => {
           <MenuItem value="">Tous les enseignes</MenuItem>
         </Select>
 
-
         <List>
           {[
             { text: 'Mon tableau de bord', icon: <GridView />, active: false },
@@ -94,7 +91,7 @@ const Sidebar = () => {
             { text: 'Supports de diffusion', icon: <InsertDriveFileOutlinedIcon />, active: false },
             { text: 'Campagnes SMS', icon: <SmsIcon />, active: false },
             { text: 'Gestion des Avis Google', icon: <GoogleIcon />, active: false },
-            { text: 'Mon Centre d’aide', icon: <HelpOutlineIcon />, active: false },
+            { text: 'Mon Centre d’aide', icon: <InfoOutlineIcon />, active: false },
           ].map(({ text, icon, active }) => (
             <ListItemButton
               key={text}
@@ -138,11 +135,11 @@ const Sidebar = () => {
             <Typography variant="subtitle2" fontWeight={600} fontSize={12} mb={1}>
               Commandez Vos Flyers Personnalisés
             </Typography>
-            {/* <img
-              src="/flyers.png"
+            <img
+              src="../src/assets/flyer.png"
               alt="Flyers"
-              style={{ width: '100%', marginBottom: 8 }}
-            /> */}
+              style={{ width: '50%', marginBottom: 8 }}
+            />
             <Typography variant="body2" color="text.secondary" fontSize={10} mb={2}>
               Personnalisez et commandez vos PLV pour booster l'engagement
               client. Créez des supports à votre image pour maximiser vos
@@ -159,7 +156,8 @@ const Sidebar = () => {
         </Card>
       </Box>
 
-      <Box>
+      {/* Bas fixe */}
+      <Box sx={{ borderTop: '1px solid #eee', mt: 2 }}>
         <List>
           <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
             <ListItemIcon sx={{ color: '#000', minWidth: 40 }}>
