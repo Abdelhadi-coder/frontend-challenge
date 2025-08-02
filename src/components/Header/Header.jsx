@@ -23,7 +23,7 @@ const Header = () => {
     bgcolor: 'white',
     borderRadius: 2,
     boxShadow: 24,
-    p: 4,
+    p: 20,
   };
 
   return (
@@ -85,8 +85,8 @@ const Header = () => {
               position: 'relative',
               fontSize: 13,
               px: 2,
-              py: 0.3,
-              height: 32,
+              py: 0.5,
+              height: 35,
               '&::before': {
                 content: '""',
                 position: 'absolute',
@@ -104,7 +104,7 @@ const Header = () => {
           </Button>
 
           <Button
-            variant="contained"
+            // variant="contained"
             startIcon={<QrCode2Icon />}
             onClick={() => setOpenQR(true)}
             sx={{
@@ -113,9 +113,8 @@ const Header = () => {
               textTransform: 'none',
               fontSize: 13,
               px: 1.5,
-              py: 0.3,
               minWidth: 'auto',
-              height: 32,
+              height: 35,
               '&:hover': { bgcolor: '#fb8c00' },
             }}
           >
@@ -125,8 +124,7 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{
-              py: 0.5,
-              height: 33,
+              height: 35,
               bgcolor: '#1976d2',
               textTransform: 'none',
               fontSize: 10,
@@ -143,8 +141,8 @@ const Header = () => {
               bgcolor: '#f0f3ff',
               border: '1px solid lightgray',
               borderRadius: 1,
-              height: 30,
-              px: 0.3,
+              height: 34,
+              px: 0.5,
               mr: 8,
               '&:hover': { bgcolor: '#e0e5f9ff' },
             }}

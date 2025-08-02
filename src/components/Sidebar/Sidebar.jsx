@@ -151,7 +151,7 @@ const Sidebar = () => {
             <Button
               variant="contained"
               fullWidth
-              sx={{ borderRadius: 1, textTransform: 'none', fontWeight: 600 }}
+              sx={{ borderRadius: 1, textTransform: 'none', fontWeight: 400 }}
             >
               COMMANDEZ
             </Button>
