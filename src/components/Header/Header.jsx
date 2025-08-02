@@ -1,14 +1,36 @@
-import React from 'react';
-import { Box, Typography, Button, IconButton } from '@mui/material';
+import React, { useState } from 'react';
+import {
+  Box,
+  Typography,
+  Button,
+  IconButton,
+  Modal,
+  Fade
+} from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
 
 const Header = () => {
+  const [openPin, setOpenPin] = useState(false);
+  const [openQR, setOpenQR] = useState(false);
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <Box
       sx={{
         display: 'flex',
-        width: "full",
+        width: "100%",
         justifyContent: 'space-between',
         alignItems: 'center',
         bgcolor: '#f9fafb',
@@ -27,7 +49,7 @@ const Header = () => {
             mb: 1,
           }}
         >
-          <Box display="" justifyContent="start" mb={1} ml={3}>
+          <Box display="flex" justifyContent="start" mb={1} ml={3}>
             <img
               src="../src/assets/header.png"
               alt="Logo"
@@ -52,68 +74,70 @@ const Header = () => {
 
       <Box display="flex" flexDirection="column" alignItems="flex-end">
         <Box display="flex" gap={1.5} mb={1}>
-    {/* Bouton Mon Code PIN */}
-        <Button
-          variant="outlined"
-          sx={{
-            bgcolor: '#fff',
-            color: '#000',
-            borderColor: '#ddd',
-            textTransform: 'none',
-            position: 'relative',
-            fontSize: 13,
-            px: 2,
-            py: 0.3,
-            height: 32, 
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              bottom: 0,
-              width: 6,
-              bgcolor: '#5500a4',
-              borderTopLeftRadius: 4,
-              borderBottomLeftRadius: 4,
-            },
-          }}
-        >
-          Mon Code PIN
-        </Button>
+          <Button
+            variant="outlined"
+            onClick={() => setOpenPin(true)}
+            sx={{
+              bgcolor: '#fff',
+              color: '#000',
+              borderColor: '#ddd',
+              textTransform: 'none',
+              position: 'relative',
+              fontSize: 13,
+              px: 2,
+              py: 0.3,
+              height: 32,
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: 6,
+                bgcolor: '#5500a4',
+                borderTopLeftRadius: 4,
+                borderBottomLeftRadius: 4,
+              },
+            }}
+          >
+            Mon Code PIN
+          </Button>
 
-        <Button
-          variant="contained"
-          startIcon={<QrCode2Icon />}
-          sx={{
-            bgcolor: '#ff9800',
-            color: '#fff',
-            textTransform: 'none',
-            fontSize: 13,
-            px: 1.5,
-            py: 0.3,
-            minWidth: 'auto',
-            height: 30,
-            '&:hover': { bgcolor: '#fb8c00' },
-          }}
-        >
-          QR Code
-        </Button>
+          <Button
+            variant="contained"
+            startIcon={<QrCode2Icon />}
+            onClick={() => setOpenQR(true)}
+            sx={{
+              bgcolor: '#ff9800',
+              color: '#fff',
+              textTransform: 'none',
+              fontSize: 13,
+              px: 1.5,
+              py: 0.3,
+              minWidth: 'auto',
+              height: 32,
+              '&:hover': { bgcolor: '#fb8c00' },
+            }}
+          >
+            QR Code
+          </Button>
 
           <Button
             variant="contained"
             sx={{
               py: 0.5,
-              height: 30,
+              height: 33,
               bgcolor: '#1976d2',
               textTransform: 'none',
               fontSize: 10,
-              // fontWeight: 10,
+              fontWeight: 600,
               '&:hover': { bgcolor: '#3f5efb' },
             }}
           >
             SAUVEGARDER
           </Button>
 
+          {/* Bouton menu */}
           <IconButton
             sx={{
               bgcolor: '#f0f3ff',
@@ -136,6 +160,36 @@ const Header = () => {
           <Box sx={{ width: 7, height: 15, bgcolor: '#3f5efb', mt: 4, mr: 8 }} />
         </Box>
       </Box>
+
+      <Modal
+        open={openPin}
+        onClose={() => setOpenPin(false)}
+        closeAfterTransition
+        sx={{
+          backdropFilter: 'blur(6px)',
+          backgroundColor: 'rgba(0,0,0,0.2)',
+        }}
+      >
+        <Fade in={openPin}>
+          <Box sx={modalStyle}>
+          </Box>
+        </Fade>
+      </Modal>
+
+      <Modal
+        open={openQR}
+        onClose={() => setOpenQR(false)}
+        closeAfterTransition
+        sx={{
+          backdropFilter: 'blur(6px)',
+          backgroundColor: 'rgba(0,0,0,0.2)',
+        }}
+      >
+        <Fade in={openQR}>
+          <Box sx={modalStyle}>
+          </Box>
+        </Fade>
+      </Modal>
     </Box>
   );
 };
