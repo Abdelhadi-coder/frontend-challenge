@@ -105,7 +105,6 @@ const Header = () => {
           </Button>
 
           <Button
-            // variant="contained"
             startIcon={<QrCode2Icon />}
             onClick={() => setOpenQR(true)}
             sx={{

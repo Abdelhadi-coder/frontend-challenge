@@ -133,13 +133,11 @@ const Home = () => {
           sx={{
             borderRadius: 2,
             overflow: "hidden",
-            // boxShadow: "0px 2px 6px rgba(0,0,0,0.08)",
             border: "0.2px solid #ddd"
           }}
         >
         <Table
           sx={{
-            // borderCollapse: "collapse",
             "& td, & th": { border: "1px solid #ddd" },
           }}
         >
@@ -148,14 +146,11 @@ const Home = () => {
             <TableCell sx={{ fontWeight: 600 }}>Ordre des actions</TableCell>
             <TableCell sx={{ fontWeight: 600 }}>Action</TableCell>
             <TableCell sx={{ fontWeight: 600 }} colSpan={2}>Cible</TableCell>
-            {/* <TableCell sx={{ fontWeight: 600, width: 60 }} align="center"> */}
-              {/* Colonne pour les boutons (supprimer/info...) */}
-            {/* </TableCell> */}
+            {/* <TableCell sx={{ fontWeight: 600, width: 60 }} align="center"> */}{/* </TableCell> */}
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {/* Ligne 1 */}
           <TableRow>
             <TableCell>Première action</TableCell>
             <TableCell>

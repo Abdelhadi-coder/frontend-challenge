@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import GameCard from "../GameCard";
 
-const Game = () => {
+const Game = ({ profile = "BASIC" }) => {
   const [open, setOpen] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const images = [
     "../src/assets/wheel.jpg",
@@ -12,6 +13,18 @@ const Game = () => {
     "../src/assets/slot.png",
     "../src/assets/card.png",
   ];
+
+  useEffect(() => {
+    if (profile === "BASIC") {
+      setSelectedIndex(0);
+    }
+  }, [profile]);
+
+  const handleSelect = (index) => {
+    if (profile !== "BASIC") {
+      setSelectedIndex(index);
+    }
+  };
 
   return (
     <Box sx={{ mt: 5 }}>
@@ -45,11 +58,16 @@ const Game = () => {
         />
       </Box>
 
-      {/* Contenu pliable */}
       {open && (
-        <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
+        <Box sx={{ display: "flex", gap: 3, flexWrap: "wrap", mt: 5 }}>
           {images.map((img, index) => (
-            <GameCard key={index} img={img} />
+            <GameCard
+              key={index}
+              img={img}
+              selected={selectedIndex === index}
+              onSelect={() => handleSelect(index)}
+              disabled={profile === "BASIC" && index !== 0} 
+            />
           ))}
         </Box>
       )}
