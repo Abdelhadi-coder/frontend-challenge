@@ -5,7 +5,7 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-const Personalisation = ({ onDrop, profile = "BASC" }) => {
+const Personalisation = ({ onDrop, profile = "BASIC" }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const [open, setOpen] = useState(false);
   const [color1, setColor1] = useState("#3F5EFB");
