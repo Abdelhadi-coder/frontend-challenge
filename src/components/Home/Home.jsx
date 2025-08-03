@@ -24,6 +24,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import ModalPop from '../ModalPop';
+import Personalisation from './Personalisation';
+import Game from './Game';
 
 const Home = () => {
   const [openCode, setOpenCode] = useState(false);
@@ -284,7 +286,8 @@ const Home = () => {
           </Typography>
         </Paper>
       </Box>
-
+      <Game />
+      <Personalisation />
     </Box>
   );
 };

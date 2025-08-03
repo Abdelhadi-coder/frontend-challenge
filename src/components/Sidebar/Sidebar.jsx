@@ -140,7 +140,7 @@ const Sidebar = () => {
             <img
               src="../src/assets/flyer.png"
               alt="Flyers"
-              style={{ width: '50%', marginBottom: 8 }}
+              style={{ width: '50%', marginBottom: 6 }}
             />
             <Typography variant="body2" color="text.secondary" fontSize={10} mb={2}>
               Personnalisez et commandez vos PLV pour booster l'engagement
