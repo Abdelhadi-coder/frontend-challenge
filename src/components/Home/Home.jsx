@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -17,11 +17,17 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import AddIcon from '@mui/icons-material/Add';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import GoogleIcon from '@mui/icons-material/Google';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import ModalPop from '../ModalPop';
 
 const Home = () => {
+  const [openCode, setOpenCode] = useState(false);
+
   return (
     <Box sx={{ p: 3, bgcolor: '#fff', minHeight: '100vh' }}>
       <Paper
@@ -64,6 +70,7 @@ const Home = () => {
         </Box>
 
         <Button
+          onClick={() => setOpenCode(true)}
           sx={{
             bgcolor: '#ffb400',
             color: '#000',
@@ -74,12 +81,14 @@ const Home = () => {
             mr: 3,
             px: 2,
             py: 1,
-
           }}
         >
           CONFIGURER MON CODE
         </Button>
       </Paper>
+
+      <ModalPop open={openCode} setOpen={setOpenCode}>
+      </ModalPop>
 
       <Box>
         <Box display="flex" alignItems="center" mt={8} mb={1}>
@@ -117,19 +126,21 @@ const Home = () => {
           Ajouter une action
         </Button>
         <TableContainer
-      component={Paper}
-      sx={{
-        borderRadius: 2,
-        overflow: "hidden",
-        boxShadow: "0px 2px 6px rgba(0,0,0,0.08)",
-      }}
-    >
-      <Table
-        sx={{
-          borderCollapse: "collapse",
-          "& td, & th": { border: "1px solid #ddd" },
-        }}
-      >
+          elevation={0}
+          component={Paper}
+          sx={{
+            borderRadius: 2,
+            overflow: "hidden",
+            // boxShadow: "0px 2px 6px rgba(0,0,0,0.08)",
+            border: "0.2px solid #ddd"
+          }}
+        >
+        <Table
+          sx={{
+            // borderCollapse: "collapse",
+            "& td, & th": { border: "1px solid #ddd" },
+          }}
+        >
         <TableHead>
           <TableRow>
             <TableCell sx={{ fontWeight: 600 }}>Ordre des actions</TableCell>
@@ -156,28 +167,29 @@ const Home = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    ml: 0.6,
                     filter: "drop-shadow(0 0 8px rgba(0,0,0,0.15))",
                   }}
                 >
                   <GoogleIcon sx={{ color: "#ffce0b" }} />
                 </Box>
-                <Typography> Avis Google </Typography>
+                <Typography ml={1}> Avis Google </Typography>
               </Box>
 
             </TableCell>
             <TableCell>
               <Box display="flex" alignItems="center" gap={1}>
-                <Typography color="text.secondary">
+                <Typography color="#999">
                   https://google.com/fr
                 </Typography>
                 <Box
                   display="flex"
                   alignItems="center"
                   gap={0.5}
-                  sx={{ bgcolor: "#f6ffed", borderRadius: 1, px: 1 }}
+                  sx={{ bgcolor: "#dcfce7", borderRadius: 1, px: 1, py: 0.4 }}
                 >
-                  <CheckCircleIcon sx={{ color: "#52c41a", fontSize: 16 }} />
-                  <Typography fontSize={12} color="#52c41a">
+                  <CheckCircleOutlineOutlinedIcon sx={{ color: "#005300", fontSize: 16 }} />
+                  <Typography fontSize={12} color="#005300">
                     Intégré
                   </Typography>
                 </Box>
@@ -190,33 +202,56 @@ const Home = () => {
             </TableCell>
           </TableRow>
 
-          {/* Ligne 2 - ajout d'une action (colSpan pour fusionner) */}
           <TableRow>
             <TableCell>Première action</TableCell>
             <TableCell colSpan={3}>
               <Box
                 display="flex"
                 alignItems="center"
-                justifyContent="center"
+                justifyContent="start"
                 gap={1}
+                ml={1.1}
                 sx={{ color: "#3f5efb", fontWeight: 500, py: 1 }}
               >
-                <Typography>Ajouter une Deuxième action</Typography>
+                <AddCircleOutlineIcon color='#3f5efb' />
+                <Typography ml={1.8}>Ajouter une Deuxième action</Typography>
               </Box>
             </TableCell>
           </TableRow>
 
           <TableRow>
             <TableCell>Dernière action</TableCell>
-            <TableCell colSpan={3} display="flex">
-              <Box display="flex" alignItems="center" gap={1}>
-                <GroupAddIcon sx={{ color: "#3f5efb" }} />
-                <Typography> Parrainage (Par défaut) </Typography>
+            <TableCell colSpan={3} display="flex" >
+              <Box display={"flex"} justifyContent={"space-between"}>
+                <Box display="flex" alignItems="center" gap={1}>
+                  <Box
+                    sx={{
+                      width: 35,
+                      height: 35,
+                      borderRadius: '50%',
+                      bgcolor: '#fff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      ml: 0.6,
+                      filter: "drop-shadow(0 0 8px rgba(0,0,0,0.15))",
+                    }}
+                  >
+                  <PeopleAltIcon sx={{ color: "#3f5efb" }} />
+                  </Box>
+                  <Typography ml={1}> Parrainage (Par défaut) </Typography>
+
+                </Box>
+                <Typography color="#3f5efb" sx={{ cursor: "pointer" }}>
+                  Modifier
+                </Typography>
+                <Box display={"flex"} justifyContent={'center'} alignItems={'center'}>
+                  <Typography fontSize={14} color="#3f5efb" sx={{ cursor: "pointer" }}>
+                    En savoir plus
+                  </Typography>
+                  <InfoOutlinedIcon sx={{ color: "#3f5efb", fontSize: 14, ml: 0.5 }} />
+                </Box>
               </Box>
-              <Typography color="#3f5efb" sx={{ cursor: "pointer" }}>
-                Modifier
-              </Typography>
-              <InfoOutlinedIcon sx={{ color: "#bbb", fontSize: 18 }} />
             </TableCell>
           </TableRow>
         </TableBody>
@@ -238,6 +273,7 @@ const Home = () => {
             p: 1.5,
             ml: 1,
             width: "100%",
+            borderRadius: 0,
           }}
         >
           <Typography variant="body2" color="warning.main" fontSize={12}>

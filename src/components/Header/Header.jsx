@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
+import ModalPop from '../ModalPop';
 
 const Header = () => {
   const [openPin, setOpenPin] = useState(false);
@@ -135,7 +136,6 @@ const Header = () => {
             SAUVEGARDER
           </Button>
 
-          {/* Bouton menu */}
           <IconButton
             sx={{
               bgcolor: '#f0f3ff',
@@ -158,36 +158,11 @@ const Header = () => {
           <Box sx={{ width: 7, height: 15, bgcolor: '#3f5efb', mt: 4, mr: 8 }} />
         </Box>
       </Box>
+      <ModalPop open={openPin} setOpen={setOpenPin}>
+      </ModalPop>
 
-      <Modal
-        open={openPin}
-        onClose={() => setOpenPin(false)}
-        closeAfterTransition
-        sx={{
-          backdropFilter: 'blur(6px)',
-          backgroundColor: 'rgba(0,0,0,0.2)',
-        }}
-      >
-        <Fade in={openPin}>
-          <Box sx={modalStyle}>
-          </Box>
-        </Fade>
-      </Modal>
-
-      <Modal
-        open={openQR}
-        onClose={() => setOpenQR(false)}
-        closeAfterTransition
-        sx={{
-          backdropFilter: 'blur(6px)',
-          backgroundColor: 'rgba(0,0,0,0.2)',
-        }}
-      >
-        <Fade in={openQR}>
-          <Box sx={modalStyle}>
-          </Box>
-        </Fade>
-      </Modal>
+      <ModalPop open={openQR} setOpen={setOpenQR}>
+      </ModalPop>
     </Box>
   );
 };

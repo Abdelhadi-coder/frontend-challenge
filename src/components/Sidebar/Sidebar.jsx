@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 
 import FolderOpenIcon from '@mui/icons-material/FolderOpenOutlined';
+import { Link } from "react-router-dom";
 import { GridView } from '@mui/icons-material';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
@@ -29,26 +30,27 @@ const Sidebar = () => {
     <Box
       sx={{
         width: 300,
-        height: '100vh',        // hauteur écran
+        height: '100vh',
         bgcolor: '#fff',
         borderRight: '2px solid #eee',
         borderBottom: '2px solid #eee',
         borderRadius: 3,
         p: 2,
         position: 'fixed',
-        display: 'flex',        // Flex pour séparer scroll et bas
+        display: 'flex',
         flexDirection: 'column',
       }}
     >
-      {/* Partie scrollable */}
       <Box sx={{ flex: 1, overflowY: 'auto' }}>
-        <Box display="flex" justifyContent="start" mb={1}>
-          <img
-            src="../src/assets/logo.png"
-            alt="Logo"
-            style={{ width: 90, objectFit: 'contain' }}
-          />
-        </Box>
+        <a href="/">
+          <Box display="flex" justifyContent="start" mb={1}>
+            <img
+              src="../src/assets/logo.png"
+              alt="Logo"
+              style={{ width: 90, objectFit: 'contain' }}
+            />
+          </Box>
+        </a>
         <Divider sx={{ width: "150%"}} />
         <Select
           fullWidth
@@ -156,7 +158,6 @@ const Sidebar = () => {
         </Card>
       </Box>
 
-      {/* Bas fixe */}
       <Box sx={{ borderTop: '1px solid #eee', mt: 2 }}>
         <List>
           <ListItemButton sx={{ borderRadius: 1, mb: 0.5 }}>
