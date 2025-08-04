@@ -4,8 +4,7 @@ import {
   Typography,
   Button,
   IconButton,
-  Modal,
-  Fade
+  useMediaQuery
 } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
@@ -15,17 +14,8 @@ const Header = () => {
   const [openPin, setOpenPin] = useState(false);
   const [openQR, setOpenQR] = useState(false);
 
-  const modalStyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'white',
-    borderRadius: 2,
-    boxShadow: 24,
-    p: 20,
-  };
+  const isTablet = useMediaQuery('(max-width:1024px)');
+  const isMobile = useMediaQuery('(max-width:600px)');
 
   return (
     <Box
@@ -33,48 +23,54 @@ const Header = () => {
         display: 'flex',
         width: "100%",
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: isMobile ? 'flex-start' : 'center',
         bgcolor: '#f9fafb',
-        py: 3,
+        py: isMobile ? 2 : 3,
+        px: isMobile ? 2 : 0,
         borderBottom: '1px solid #eee',
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? 2 : 0,
       }}
     >
-      <Box>
-        <Typography
-          variant="h3"
-          sx={{
-            fontWeight: 700,
-            color: '#1976d2',
-            position: 'relative',
-            display: 'inline-block',
-            mb: 1,
-          }}
-        >
-          <Box display="flex" justifyContent="start" mb={1} ml={3}>
-            <img
-              src="../src/assets/header.png"
-              alt="Logo"
-              style={{ width: 410, objectFit: 'contain' }}
-            />
-          </Box>
+      <Box sx={{ width: isMobile ? '100%' : 'auto' }}>
+        <Box display="flex" justifyContent={isMobile ? "center" : "start"} mb={1}>
+          <img
+            src="../src/assets/header.png"
+            alt="Logo"
+            style={{
+              width: isMobile ? 180 : isTablet ? 300 : 410,
+              objectFit: 'contain'
+            }}
+          />
+        </Box>
+
+        {!isMobile && (
           <Box
             sx={{
-              position: 'absolute',
-              bottom: 0,
-              left: -10,
-              width: '120%',
+              position: 'relative',
+              width: '100%',
               height: 12,
               border: '2px solid #1976d2',
               borderRadius: '50%',
-              transform: 'translateY(50%)',
+              transform: 'translateY(-6px)',
               zIndex: -1,
             }}
           />
-        </Typography>
+        )}
       </Box>
-
-      <Box display="flex" flexDirection="column" alignItems="flex-end">
-        <Box display="flex" gap={1.5} mb={1}>
+      <Box
+        display="flex"
+        flexDirection={isMobile ? "column" : "column"}
+        alignItems={isMobile ? "center" : "flex-end"}
+        width={isMobile ? "100%" : "auto"}
+      >
+        <Box
+          display="flex"
+          gap={isMobile ? 1 : 1.5}
+          mb={1}
+          flexWrap="wrap"
+          justifyContent={isMobile ? "center" : "flex-end"}
+        >
           <Button
             variant="outlined"
             onClick={() => setOpenPin(true)}
@@ -127,7 +123,7 @@ const Header = () => {
               height: 35,
               bgcolor: '#1976d2',
               textTransform: 'none',
-              fontSize: 10,
+              fontSize: isMobile ? 11 : 10,
               fontWeight: 600,
               '&:hover': { bgcolor: '#3f5efb' },
             }}
@@ -135,33 +131,43 @@ const Header = () => {
             SAUVEGARDER
           </Button>
 
-          <IconButton
-            sx={{
-              bgcolor: '#f0f3ff',
-              border: '1px solid lightgray',
-              borderRadius: 1,
-              height: 34,
-              px: 0.5,
-              mr: 8,
-              '&:hover': { bgcolor: '#e0e5f9ff' },
-            }}
-          >
-            <MoreHorizIcon sx={{ color: "#3f5efb" }} />
-          </IconButton>
+          {!isMobile && (
+            <IconButton
+              sx={{
+                bgcolor: '#f0f3ff',
+                border: '1px solid lightgray',
+                borderRadius: 1,
+                height: 34,
+                px: 0.5,
+                mr: 8,
+                '&:hover': { bgcolor: '#e0e5f9ff' },
+              }}
+            >
+              <MoreHorizIcon sx={{ color: "#3f5efb" }} />
+            </IconButton>
+          )}
         </Box>
-
-        <Box display="flex" alignItems="center" gap={1}>
-          <Typography variant="body2" sx={{ color: '#333', mt: 4 }}>
+        <Box
+          display="flex"
+          alignItems="center"
+          gap={1}
+          justifyContent={isMobile ? "center" : "flex-end"}
+          width="100%"
+        >
+          <Typography
+            variant="body2"
+            sx={{ color: '#333', mt: isMobile ? 1 : 4, textAlign: isMobile ? 'center' : 'right' }}
+          >
             Disponible jusqu’au 10 déc. 2025
           </Typography>
-          <Box sx={{ width: 7, height: 15, bgcolor: '#3f5efb', mt: 4, mr: 8 }} />
+          {!isMobile && (
+            <Box sx={{ width: 7, height: 15, bgcolor: '#3f5efb', mt: 4, mr: 8 }} />
+          )}
         </Box>
       </Box>
-      <ModalPop open={openPin} setOpen={setOpenPin}>
-      </ModalPop>
 
-      <ModalPop open={openQR} setOpen={setOpenQR}>
-      </ModalPop>
+      <ModalPop open={openPin} setOpen={setOpenPin}></ModalPop>
+      <ModalPop open={openQR} setOpen={setOpenQR}></ModalPop>
     </Box>
   );
 };

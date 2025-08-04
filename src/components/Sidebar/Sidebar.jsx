@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   List,
@@ -11,11 +11,14 @@ import {
   MenuItem,
   Card,
   CardContent,
-  Button
+  Button,
+  Drawer,
+  IconButton,
+  useMediaQuery
 } from '@mui/material';
 
+import MenuIcon from '@mui/icons-material/Menu';
 import FolderOpenIcon from '@mui/icons-material/FolderOpenOutlined';
-import { Link } from "react-router-dom";
 import { GridView } from '@mui/icons-material';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
@@ -26,17 +29,18 @@ import GoogleIcon from '@mui/icons-material/Google';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 const Sidebar = () => {
-  return (
+  const isMobile = useMediaQuery('(max-width:900px)');
+  const [open, setOpen] = useState(false);
+
+  const content = (
     <Box
       sx={{
-        width: 300,
-        height: '100vh',
+        width: isMobile ? 260 : 300,
+        height: '100%',
         bgcolor: '#fff',
-        borderRight: '2px solid #eee',
-        borderBottom: '2px solid #eee',
-        borderRadius: 3,
+        borderRight: isMobile ? 'none' : '2px solid #eee',
+        borderBottom: isMobile ? 'none' : '2px solid #eee',
         p: 2,
-        position: 'fixed',
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -47,11 +51,11 @@ const Sidebar = () => {
             <img
               src="../src/assets/logo.png"
               alt="Logo"
-              style={{ width: 90, objectFit: 'contain' }}
+              style={{ width: isMobile ? 70 : 90, objectFit: 'contain' }}
             />
           </Box>
         </a>
-        <Divider sx={{ width: "150%"}} />
+        <Divider sx={{ width: "100%"}} />
         <Select
           fullWidth
           defaultValue=""
@@ -109,53 +113,57 @@ const Sidebar = () => {
               >
                 {icon}
               </ListItemIcon>
-              <ListItemText
-                primary={text}
-                primaryTypographyProps={{
-                  fontWeight: active ? 600 : 400,
-                  color: active ? '#0d47a1' : '#999',
-                  fontSize: 14,
-                }}
-              />
+              {!isMobile && (
+                <ListItemText
+                  primary={text}
+                  primaryTypographyProps={{
+                    fontWeight: active ? 600 : 400,
+                    color: active ? '#0d47a1' : '#999',
+                    fontSize: 14,
+                  }}
+                />
+              )}
             </ListItemButton>
           ))}
         </List>
 
-        <Card
-          variant="outlined"
-          sx={{
-            mt: 7,
-            borderRadius: 3,
-            borderWidth: 2,
-            backgroundColor: '#f0f3ff', 
-            borderColor: '#3f51b5',
-            textAlign: 'center',
-            overflow: 'hidden',
-          }}
-        >
-          <CardContent sx={{ p: 2 }}>
-            <Typography variant="subtitle2" fontWeight={600} fontSize={12} mb={1}>
-              Commandez Vos Flyers Personnalisés
-            </Typography>
-            <img
-              src="../src/assets/flyer.png"
-              alt="Flyers"
-              style={{ width: '50%', marginBottom: 6 }}
-            />
-            <Typography variant="body2" color="text.secondary" fontSize={10} mb={2}>
-              Personnalisez et commandez vos PLV pour booster l'engagement
-              client. Créez des supports à votre image pour maximiser vos
-              conversions.
-            </Typography>
-            <Button
-              variant="contained"
-              fullWidth
-              sx={{ borderRadius: 1, textTransform: 'none', fontWeight: 400 }}
-            >
-              COMMANDEZ
-            </Button>
-          </CardContent>
-        </Card>
+        {!isMobile && (
+          <Card
+            variant="outlined"
+            sx={{
+              mt: 7,
+              borderRadius: 3,
+              borderWidth: 2,
+              backgroundColor: '#f0f3ff', 
+              borderColor: '#3f51b5',
+              textAlign: 'center',
+              overflow: 'hidden',
+            }}
+          >
+            <CardContent sx={{ p: 2 }}>
+              <Typography variant="subtitle2" fontWeight={600} fontSize={12} mb={1}>
+                Commandez Vos Flyers Personnalisés
+              </Typography>
+              <img
+                src="../src/assets/flyer.png"
+                alt="Flyers"
+                style={{ width: '50%', marginBottom: 6 }}
+              />
+              <Typography variant="body2" color="text.secondary" fontSize={10} mb={2}>
+                Personnalisez et commandez vos PLV pour booster l'engagement
+                client. Créez des supports à votre image pour maximiser vos
+                conversions.
+              </Typography>
+              <Button
+                variant="contained"
+                fullWidth
+                sx={{ borderRadius: 1, textTransform: 'none', fontWeight: 400 }}
+              >
+                COMMANDEZ
+              </Button>
+            </CardContent>
+          </Card>
+        )}
       </Box>
 
       <Box sx={{ borderTop: '1px solid #eee', mt: 2 }}>
@@ -164,23 +172,52 @@ const Sidebar = () => {
             <ListItemIcon sx={{ color: '#000', minWidth: 40 }}>
               <AccountCircleOutlinedIcon />
             </ListItemIcon>
-            <ListItemText
-              primary="Compte"
-              primaryTypographyProps={{ fontWeight: 500, color: '#000' }}
-            />
+            {!isMobile && (
+              <ListItemText
+                primary="Compte"
+                primaryTypographyProps={{ fontWeight: 500, color: '#000' }}
+              />
+            )}
           </ListItemButton>
           <ListItemButton sx={{ borderRadius: 1 }}>
             <ListItemIcon sx={{ color: '#000', minWidth: 40 }}>
               <LogoutOutlinedIcon />
             </ListItemIcon>
-            <ListItemText
-              primary="Déconnexion"
-              primaryTypographyProps={{ fontWeight: 500, color: '#000' }}
-            />
+            {!isMobile && (
+              <ListItemText
+                primary="Déconnexion"
+                primaryTypographyProps={{ fontWeight: 500, color: '#000' }}
+              />
+            )}
           </ListItemButton>
         </List>
       </Box>
     </Box>
+  );
+
+  return (
+    <>
+      {isMobile ? (
+        <>
+          <IconButton
+            onClick={() => setOpen(true)}
+            sx={{ position: 'fixed', top: 16, left: 16, zIndex: 1300 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer
+            anchor="left"
+            open={open}
+            onClose={() => setOpen(false)}
+            PaperProps={{ sx: { borderRight: 'none' } }}
+          >
+            {content}
+          </Drawer>
+        </>
+      ) : (
+        <Box sx={{ position: 'fixed', height: '100vh' }}>{content}</Box>
+      )}
+    </>
   );
 };
 
